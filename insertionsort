@@ -1,0 +1,50 @@
+Enter file contents here
+// insertion sort.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+using namespace std;
+
+template <class T>
+
+int getArrayLen(T& array)
+{
+return (sizeof(array) / sizeof(array[0]));
+}
+
+
+void insertionsort(int A[],int len)
+{
+	//int len=sizeof(A)/sizeof(A[0]);
+	//int len1=sizeof(A[0]);
+	//int len2=sizeof(A);
+	//int len=getArrayLen(A);
+	for(int i=1;i<len;i++)
+	{
+		int temp=A[i];
+		int j;
+		for(j=i;j>0&&A[j-1]>temp;j--)
+		{
+			A[j]=A[j-1];
+		}
+		A[j]=temp;
+	}
+}
+int main()
+{
+	int A[]={4,6,2,5,1};
+	int len=sizeof(A)/sizeof(A[0]);
+	insertionsort(A,len);
+	for(int i=0;i<sizeof(A)/sizeof(A[0]);i++)
+	{
+		cout<<A[i]<<" ";
+	}
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	return 0;
+}
+
+当在功能函数中传递计算数组大小的时候，由于数组变成了形参，退化成了指针，只能在主函数中定义。所以sizeof（A）变成了指针大小：4，而不再是地址范围大小。
