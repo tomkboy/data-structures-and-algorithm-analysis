@@ -1,0 +1,67 @@
+Enter file contents here
+// mergesort.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+
+using namespace std;
+class solution{
+public:
+void mergesort(int A[],int* p,int i,int j)
+{
+	
+	//while(i<j)//这里恒成立。。。
+	if(i<j)
+	{
+		int mid=(i+j)>>1;
+		mergesort(A,p,i,mid);
+		mergesort(A,p,mid+1,j);
+		merge(A,p,i,mid,j);
+	}
+}
+void mergesort(int A[],int len)
+{
+	int *b=new int[len];
+	mergesort(A,b,0,len-1);
+}
+void merge(int A[],int* p,int a,int b,int end)
+{
+	int k=end-a+1;
+	int temppos=a;
+	int tempright=b+1;
+	while(a<=b&&tempright<=end)
+	{
+		if(A[a]<=A[tempright])
+			p[temppos++]=A[a++];
+		else
+			p[temppos++]=A[tempright++];
+	}
+	while(a<=b)
+		p[temppos++]=A[a++];
+	while(tempright<=end)
+		p[temppos++]=A[tempright++];
+	for(int i=0;i<k;i++,end--)
+		A[end]=p[end];
+	
+}
+};
+
+
+int main()
+{
+	solution k;
+	
+	int a[]={3,6,1,5,2};
+	int len=sizeof(a)/sizeof(a[0]);
+	k.mergesort(a,len);
+	for(int i=0;i<len;i++)
+	{
+		cout<<a[i]<<" ";
+	}
+}
+int _tmain(int argc, _TCHAR* argv[])
+{
+	return 0;
+}
+
